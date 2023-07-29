@@ -16,18 +16,18 @@ class EventServiceProvider extends ServiceProvider {
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Registered::class                                               => [
+        Registered::class  => [
             SendEmailVerificationNotification::class,
         ],
-        PlayerAdded::class                                              => [
+        PlayerAdded::class => [
             AddPlayer::class,
             'handle'
         ],
-        'native:' . PlayerAdded::class                                  => [
-            AddPlayer::class,
-            'handle'
-        ],
-        'native:' . \Native\Laravel\Events\Windows\WindowFocused::class => [ AddPlayer::class, 'handle' ],
+//        'native:' . PlayerAdded::class => [
+//            AddPlayer::class,
+//            'handle'
+//        ],
+        // 'native:' . \Native\Laravel\Events\Windows\WindowFocused::class => [ AddPlayer::class, 'handle' ],
 
     ];
 
@@ -35,9 +35,9 @@ class EventServiceProvider extends ServiceProvider {
      * Register any events for your application.
      */
     public function boot(): void {
-        Event::listen( PlayerAdded::class, function () {
-            echo "here";
-        } );
+//        Event::listen( PlayerAdded::class, function () {
+//            echo "here";
+//        } );
 
     }
 
