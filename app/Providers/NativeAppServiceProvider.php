@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\PlayerAdded;
+use App\Listeners\AddPlayer;
 use Native\Laravel\Facades\ContextMenu;
 use Native\Laravel\Facades\Dock;
 use Native\Laravel\Facades\Window;
@@ -15,9 +17,9 @@ class NativeAppServiceProvider {
      */
     public function boot(): void {
         Menu::new()
-            ->submenu( 'My Submenu',
-                Menu::new()
-                    ->event( App\Events\AddPlayer::class, 'Add Player' ) )
+            ->submenu( 'My Submenu', Menu::new()
+                                         ->event( PlayerAdded::class, 'Trigger my event' )
+            )
             ->register();
 
         Window::open()
