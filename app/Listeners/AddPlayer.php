@@ -21,8 +21,7 @@ class AddPlayer {
      * Handle the event.
      */
     public function handle( PlayerAdded $event ): void {
-        $player = new Game( [
-        ] );
+        $player = new Game( [] );
         $player->save();
     }
 }
