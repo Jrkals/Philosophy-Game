@@ -50,17 +50,15 @@ class Idea extends Resource {
         return [
             ID::make()->sortable(),
 
-            Gravatar::make()->maxWidth( 50 ),
-
             Text::make( 'Name' )
                 ->sortable()
                 ->rules( 'required', 'max:255' ),
 
             Text::make( 'Category' )
                 ->sortable()
-                ->rules( 'required', 'email', 'max:254' ),
-            Number::make( 'Points' )->readonly()->sortable()->default( 0 ),
-            Boolean::make( 'Winner' )->default( false )->readonly(),
+                ->rules( 'required', 'max:254' ),
+            Number::make( 'Points', 'points' )->sortable()->default( 0 ),
+            Boolean::make( 'Winner', 'winner' )->default( false ),
             BelongsTo::make( 'Game' )
         ];
     }

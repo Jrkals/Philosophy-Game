@@ -48,11 +48,10 @@ class Transaction extends Resource {
         return [
             ID::make()->sortable(),
 
-            Gravatar::make()->maxWidth( 50 ),
-            Number::make( 'Round' ),
-            Number::make( 'Turn' ),
-            Number::make( 'Amount' ),
-            BelongsTo::make( 'Player' ),
+            Number::make( 'Round', 'round' ),
+            Number::make( 'Turn', 'turn' ),
+            Number::make( 'Amount', 'amount' ),
+            BelongsTo::make( 'Player' )->nullable(),
             BelongsTo::make( 'Game' ),
             BelongsTo::make( 'Idea' ),
 

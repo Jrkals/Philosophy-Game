@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
@@ -23,7 +24,7 @@ class Game extends Resource {
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -32,6 +33,7 @@ class Game extends Resource {
      */
     public static $search = [
         'id',
+        'name'
     ];
 
     /**
@@ -44,6 +46,11 @@ class Game extends Resource {
     public function fields( NovaRequest $request ) {
         return [
             ID::make()->sortable(),
+            Text::make( 'Name' )->sortable(),
+            HasMany::make( 'Players' ),
+            HasMany::make( 'Ideas' ),
+            HasMany::make( 'Transactions' ),
+
         ];
     }
 

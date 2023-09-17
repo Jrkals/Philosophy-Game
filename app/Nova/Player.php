@@ -35,7 +35,6 @@ class Player extends Resource {
     public static $search = [
         'id',
         'name',
-        'email',
     ];
 
     /**
@@ -49,13 +48,11 @@ class Player extends Resource {
         return [
             ID::make()->sortable(),
 
-            Gravatar::make()->maxWidth( 50 ),
-
-            Text::make( 'Name' )
+            Text::make( 'Name', 'name' )
                 ->sortable()
                 ->rules( 'required', 'max:255' ),
-            Number::make( 'Total' )->sortable()->readonly()->default( 0 ),
-            Number::make( 'Adjusted' )->sortable()->readonly()->default( 0 ),
+            Number::make( 'Total', 'total' )->sortable()->default( 0 ),
+            Number::make( 'Adjusted', 'adjusted' )->sortable()->default( 0 ),
             BelongsTo::make( 'Game' )
 
         ];
