@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->string( 'name' );
+            $table->integer( 'current_turn' )->default( 0 );
+            $table->integer( 'current_round' )->default( 0 );
         } );
         Schema::create( 'players', function ( Blueprint $table ) {
             $table->id();
@@ -43,6 +45,7 @@ return new class extends Migration {
             $table->integer( 'round' );
             $table->integer( 'turn' );
             $table->integer( 'amount' );
+            $table->boolean( 'counted' )->default( false );
         } );
     }
 

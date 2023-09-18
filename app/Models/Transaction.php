@@ -5,19 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
-{
+class Transaction extends Model {
     use HasFactory;
 
+    protected $casts = [
+        'counted' => 'boolean'
+    ];
+
     public function player(): \Illuminate\Database\Eloquent\Relations\BelongsTo {
-        return $this->belongsTo(Player::class);
+        return $this->belongsTo( Player::class );
     }
 
     public function idea(): \Illuminate\Database\Eloquent\Relations\BelongsTo {
-        return $this->belongsTo(Idea::class);
+        return $this->belongsTo( Idea::class );
     }
 
     public function game(): \Illuminate\Database\Eloquent\Relations\BelongsTo {
-        return $this->belongsTo(Game::class);
+        return $this->belongsTo( Game::class );
     }
 }
