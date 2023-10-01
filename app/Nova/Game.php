@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use App\Nova\Metrics\Round;
+use App\Nova\Metrics\Turn;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\Gravatar;
@@ -61,8 +63,8 @@ class Game extends Resource {
      *
      * @return array
      */
-    public function cards( NovaRequest $request ) {
-        return [];
+    public function cards( NovaRequest $request ): array {
+        return [ new Round, new Turn ];
     }
 
     /**
