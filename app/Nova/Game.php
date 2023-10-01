@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\refreshScore;
 use App\Nova\Metrics\Round;
 use App\Nova\Metrics\Turn;
 use Illuminate\Http\Request;
@@ -97,6 +98,6 @@ class Game extends Resource {
      * @return array
      */
     public function actions( NovaRequest $request ) {
-        return [];
+        return [ new refreshScore ];
     }
 }
