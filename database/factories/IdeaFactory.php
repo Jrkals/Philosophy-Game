@@ -10,8 +10,10 @@ class IdeaFactory extends Factory {
 
     public function definition(): array {
         return [
-            'points' => 0,
-            'winner' => false,
+            'name'     => $this->faker->word(),
+            'category' => $this->faker->word(),
+            'points'   => 0,
+            'winner'   => false,
         ];
     }
 }

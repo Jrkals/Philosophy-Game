@@ -25,7 +25,7 @@ class Transaction extends Resource {
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -34,7 +34,8 @@ class Transaction extends Resource {
      */
     public static $search = [
         'id',
-        'name',
+        'turn',
+        'round'
     ];
 
     /**
@@ -48,8 +49,8 @@ class Transaction extends Resource {
         return [
             ID::make()->sortable(),
 
-            Number::make( 'Round', 'round' ),
-            Number::make( 'Turn', 'turn' ),
+            Number::make( 'Round', 'round' )->default( 1 ),
+            Number::make( 'Turn', 'turn' )->default( 1 ),
             Number::make( 'Amount', 'amount' ),
             BelongsTo::make( 'Player' )->nullable(),
             BelongsTo::make( 'Game' ),

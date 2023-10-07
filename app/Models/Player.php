@@ -21,26 +21,27 @@ class Player extends Model {
         $categoryLead  = []; //category -> idea
 
         foreach ( $this->transactions as $transaction ) {
-            if ( empty( $ideaSubTotals[ $transaction->idea ] ) ) {
-                $ideaSubTotals[ $transaction->idea ] = $transaction->total;
+            if ( ! isset( $ideaSubTotals[ $transaction->idea->name ] ) ) {
+                $ideaSubTotals[ $transaction->idea->name ] = $transaction->total;
             } else {
-                $ideaSubTotals[ $transaction->idea ] += $transaction->total;
+                $ideaSubTotals[ $transaction->idea->name ] += $transaction->total;
             }
         }
 
-        foreach ( $ideaSubTotals as $idea => $total ) {
-            if ( empty( $categoryLead[ $idea->category ] ) ) {
-                $categoryLead[ $idea->category ] = $idea;
+        foreach ( $ideaSubTotals as $ideaName => $total ) {
+            $category = Idea::getCategoryForName( $ideaName );
+            if ( empty( $categoryLead[ $category ] ) ) {
+                $categoryLead[ $category ] = $ideaName;
             } else {
-                if ( $total > $ideaSubTotals[ $idea->category ] ) {
-                    $categoryLead[ $idea->category ] = $idea;
+                if ( $total > $ideaSubTotals[ $categoryLead[ $category ] ] ) {
+                    $categoryLead[ $category ] = $ideaName;
                 }
             }
         }
         $this->adjusted = $this->total;
 
         foreach ( $this->transactions as $transaction ) {
-            if ( $categoryLead[ $transaction->idea->category ] !== $transaction->idea ) {
+            if ( $categoryLead[ $transaction->idea->category ] !== $transaction->idea->name ) {
                 $this->adjusted -= $transaction->amount;
             }
             if ( $transaction->idea->winner ) {

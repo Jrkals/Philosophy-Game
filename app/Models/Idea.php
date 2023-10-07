@@ -12,6 +12,10 @@ class Idea extends Model {
         'winner' => 'boolean'
     ];
 
+    public static function getCategoryForName( string $name ) {
+        return Idea::query()->where( 'name', $name )->first()->category;
+    }
+
     public function game(): \Illuminate\Database\Eloquent\Relations\BelongsTo {
         return $this->belongsTo( Game::class );
     }

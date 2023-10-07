@@ -18,12 +18,6 @@ return new class extends Migration {
             $table->rememberToken();
             $table->timestamps();
         } );
-        \App\Models\User::factory( [
-            'name'              => 'Admin',
-            'email'             => 'jkalan@wordonfire.org',
-            'password'          => bcrypt( 'password' ),
-            'email_verified_at' => \Carbon\Carbon::now()->toDateTimeString()
-        ] )->create();
     }
 
     /**
