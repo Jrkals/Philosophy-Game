@@ -27,21 +27,16 @@ class refreshScore extends Action {
         $recentTransactions = Transaction::query()->where( 'counted', false )->get();
         foreach ( $recentTransactions as $transaction ) {
             if ( $transaction->player ) {
-                $transaction->player->total += $transaction->amount;
-                $transaction->player->save();
+                $transaction->countTransactionToPlayer();
             }
-            $transaction->idea->points += $transaction->amount;
-            $transaction->counted      = true;
-            $transaction->save();
-            $transaction->idea->save();
+            $transaction->countTransactionToIdea();
         }
         $categoryWinnerPoints = []; //Category -> total
         $categoryWinnerIdeas  = []; //Category -> idea
 
         foreach ( $game->ideas as $idea ) {
             if ( $idea->winner === true ) {
-                $idea->winner = false;
-                $idea->save();
+                $idea->setWinner( false );
             }
             if ( empty( $categoryWinnerIdeas[ $idea->category ] ) || $idea->points > $categoryWinnerPoints[ $idea->category ] ) {
                 $categoryWinnerPoints[ $idea->category ] = $idea->points;
@@ -49,11 +44,12 @@ class refreshScore extends Action {
             }
         }
         foreach ( $categoryWinnerIdeas as $category_winner_idea ) {
-            $category_winner_idea->winner = true;
-            $category_winner_idea->save();
+            $category_winner_idea->setWinner( true );
         }
 
-
+        foreach ( $game->players as $player ) {
+            $player->calculateAdjustedPointsTotal();
+        }
     }
 
     /**

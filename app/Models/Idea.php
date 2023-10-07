@@ -15,4 +15,9 @@ class Idea extends Model {
     public function game(): \Illuminate\Database\Eloquent\Relations\BelongsTo {
         return $this->belongsTo( Game::class );
     }
+
+    public function setWinner( $status ): void {
+        $this->winner = $status;
+        $this->save();
+    }
 }
