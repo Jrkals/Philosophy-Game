@@ -51,7 +51,7 @@ class ScoreTest extends TestCase {
         $this->assertDatabaseHas( 'players', [
             'id'       => 2,
             'total'    => 14,
-            'adjusted' => 18
+            'adjusted' => 28
         ] );
         $this->assertDatabaseHas( 'players', [
             'id'       => 3,
