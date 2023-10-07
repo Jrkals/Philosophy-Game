@@ -49,12 +49,12 @@ class Transaction extends Resource {
         return [
             ID::make()->sortable(),
 
-            Number::make( 'Round', 'round' )->default( 1 ),
-            Number::make( 'Turn', 'turn' )->default( 1 ),
+            Number::make( 'Round', 'round' )->default( Game::fetchCurrentRound( 'round' ) ),
+            Number::make( 'Turn', 'turn' )->default( Game::fetchCurrentRound( 'turn' ) ),
             Number::make( 'Amount', 'amount' ),
-            BelongsTo::make( 'Player' )->nullable(),
             BelongsTo::make( 'Game' ),
             BelongsTo::make( 'Idea' ),
+            BelongsTo::make( 'Player' )->nullable(),
 
         ];
     }

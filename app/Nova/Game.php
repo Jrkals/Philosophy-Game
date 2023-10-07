@@ -43,6 +43,15 @@ class Game extends Resource {
         'name'
     ];
 
+    public static function fetchCurrentRound( string $string ) {
+        $game = \App\Models\Game::query()->latest()->first();
+        if ( $string === 'round' ) {
+            return $game->current_round;
+        }
+
+        return $game->current_turn;
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -71,7 +80,7 @@ class Game extends Resource {
      * @return array
      */
     public function cards( NovaRequest $request ): array {
-        return [ new Round, new Turn ];
+        return [];
     }
 
     /**
