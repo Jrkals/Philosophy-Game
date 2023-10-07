@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\NextRound;
+use App\Nova\Actions\NextTurn;
 use App\Nova\Actions\refreshScore;
 use App\Nova\Actions\SeedIdeas;
 use App\Nova\Metrics\Round;
@@ -11,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -51,6 +54,8 @@ class Game extends Resource {
         return [
             ID::make()->sortable(),
             Text::make( 'Name' )->sortable(),
+            Number::make( 'Current Turn' )->default( 1 ),
+            Number::make( 'Current Round' )->default( 1 ),
             HasMany::make( 'Players' ),
             HasMany::make( 'Ideas' ),
             HasMany::make( 'Transactions' ),
@@ -99,6 +104,6 @@ class Game extends Resource {
      * @return array
      */
     public function actions( NovaRequest $request ) {
-        return [ new refreshScore, new SeedIdeas ];
+        return [ new refreshScore, new SeedIdeas, new NextRound, new NextTurn ];
     }
 }
