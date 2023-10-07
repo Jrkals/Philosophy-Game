@@ -24,14 +24,16 @@ class refreshScore extends Action {
      */
     public function handle( ActionFields $fields, Collection $models ) {
         $game               = $models->first();
-        $recentTransactions = Transaction::query()->where( 'counted', '=', false );
+        $recentTransactions = Transaction::query()->where( 'counted', false )->get();
         foreach ( $recentTransactions as $transaction ) {
             if ( $transaction->player ) {
                 $transaction->player->total += $transaction->amount;
+                $transaction->player->save();
             }
             $transaction->idea->points += $transaction->amount;
             $transaction->counted      = true;
             $transaction->save();
+            $transaction->idea->save();
         }
         $categoryWinnerPoints = []; //Category -> total
         $categoryWinnerIdeas  = []; //Category -> idea
@@ -41,7 +43,7 @@ class refreshScore extends Action {
                 $idea->winner = false;
                 $idea->save();
             }
-            if ( empty( $categoryWinners[ $idea->category ] ) || $idea->points > $categoryWinnerPoints[ $idea->category ] ) {
+            if ( empty( $categoryWinnerIdeas[ $idea->category ] ) || $idea->points > $categoryWinnerPoints[ $idea->category ] ) {
                 $categoryWinnerPoints[ $idea->category ] = $idea->points;
                 $categoryWinnerIdeas[ $idea->category ]  = $idea;
             }

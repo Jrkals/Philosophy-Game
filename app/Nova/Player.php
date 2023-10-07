@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
@@ -53,7 +54,8 @@ class Player extends Resource {
                 ->rules( 'required', 'max:255' ),
             Number::make( 'Total', 'total' )->sortable()->default( 0 ),
             Number::make( 'Adjusted', 'adjusted' )->sortable()->default( 0 ),
-            BelongsTo::make( 'Game' )
+            BelongsTo::make( 'Game' ),
+            HasMany::make( 'Transactions' ),
 
         ];
     }
