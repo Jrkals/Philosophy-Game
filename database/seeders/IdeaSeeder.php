@@ -8,6 +8,9 @@ use App\Models\Idea;
 class IdeaSeeder extends \Illuminate\Database\Seeder {
 
     public function run( Game $game ): void {
+        if ( ! $game ) {
+            $gam = Game::factory()->create();
+        }
         $atheism             = Idea::factory( [
             'name'     => 'Atheism',
             'category' => 'Theism'

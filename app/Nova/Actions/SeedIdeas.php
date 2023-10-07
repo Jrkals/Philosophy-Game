@@ -3,15 +3,17 @@
 namespace App\Nova\Actions;
 
 use App\Models\Transaction;
+use Database\Seeders\IdeaSeeder;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Actions\DestructiveAction;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class SeedIdeas extends Action {
+class SeedIdeas extends DestructiveAction {
     use InteractsWithQueue, Queueable;
 
     /**
@@ -24,7 +26,7 @@ class SeedIdeas extends Action {
      */
     public function handle( ActionFields $fields, Collection $models ) {
         $game       = $models->first();
-        $ideaSeeder = new IdeaSeeder();
+        $ideaSeeder = new IdeaSeeder( $game );
         $ideaSeeder->run( $game );
     }
 
