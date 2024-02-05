@@ -80,7 +80,7 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
             'category' => 'Ethics'
         ] )->for( $game )->create();
         $pantheism           = Idea::factory( [
-            'name'     => 'Thomism',
+            'name'     => 'Scholasticism',
             'category' => 'Method'
         ] )->for( $game )->create();
         $pantheism           = Idea::factory( [
