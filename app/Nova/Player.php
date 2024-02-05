@@ -38,6 +38,13 @@ class Player extends Resource {
         'name',
     ];
 
+    public static $perPageViaRelationship = 8;
+
+
+    public static function relatableQuery( NovaRequest $request, $query ) {
+        return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) );
+    }
+
     /**
      * Get the fields displayed by the resource.
      *

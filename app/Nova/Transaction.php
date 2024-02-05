@@ -26,7 +26,6 @@ class Transaction extends Resource {
      * @var string
      */
     public static $title = 'id';
-
     /**
      * The columns that should be searched.
      *
@@ -37,6 +36,13 @@ class Transaction extends Resource {
         'turn',
         'round'
     ];
+
+    public static $perPageViaRelationship = 25;
+
+
+    public static function relatableQuery( NovaRequest $request, $query ) {
+        return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) );
+    }
 
     /**
      * Get the fields displayed by the resource.

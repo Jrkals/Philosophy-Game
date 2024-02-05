@@ -39,6 +39,12 @@ class Idea extends Resource {
         'points',
     ];
 
+    public static $perPageViaRelationship = 25;
+
+    public static function relatableQuery( NovaRequest $request, $query ) {
+        return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) );
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -56,8 +62,9 @@ class Idea extends Resource {
 
             Text::make( 'Category' )
                 ->sortable()
+                ->filterable()
                 ->rules( 'required', 'max:254' ),
-            Number::make( 'Points', 'points' )->sortable()->default( 0 ),
+            Number::make( 'Points', 'points' )->sortable()->filterable()->default( 0 ),
             Boolean::make( 'Winner', 'winner' )->default( false ),
             BelongsTo::make( 'Game' )
         ];

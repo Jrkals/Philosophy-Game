@@ -47,6 +47,10 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
             'name'     => 'Jesus is mere man',
             'category' => 'Jesus'
         ] )->for( $game )->create();
+        $materialiasm        = Idea::factory( [
+            'name'     => 'Materialism',
+            'category' => 'Metaphysics',
+        ] )->for( $game )->create();
         $pantheism           = Idea::factory( [
             'name'     => 'Hylomorphism',
             'category' => 'Metaphysics'
