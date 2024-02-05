@@ -57,6 +57,27 @@ class Player extends Model {
     }
 
     public function summonCharacter( Character $character ): void {
+        foreach ( $character->ideas as $idea ) {
+            $transaction = new Transaction( [
+                'game_id'   => $character->game_id,
+                'idea_id'   => $idea->id,
+                'amount'    => $this->getIdeaAmount( $idea->pivot->type ),
+                'player_id' => $this->id,
+                'round'     => $character->game->round,
+                'turn'      => $character->game->turn,
+            ] );
+            $transaction->save();
+        }
+    }
 
+    public function getIdeaAmount( string $type ): int {
+        switch ( $type ) {
+            case 'founding':
+                return 20;
+            case 'major':
+                return 10;
+            case 'minor':
+                return 5;
+        }
     }
 }
