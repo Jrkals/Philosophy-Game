@@ -55,4 +55,8 @@ class Player extends Model {
         $this->save();
 
     }
+
+    public function summonCharacter( Character $character ): void {
+
+    }
 }

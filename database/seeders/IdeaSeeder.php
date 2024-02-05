@@ -10,7 +10,7 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
 
     public function seedIdeas( Game $game ): void {
         if ( ! $game ) {
-            $gam = Game::factory()->create();
+            $game = Game::factory()->create();
         }
         $atheism             = Idea::factory( [
             'name'     => 'Atheism',
@@ -103,11 +103,23 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
     }
 
     public function seedCharacters( Game $game ): void {
-        Character::factory( [
+        $platonism    = Idea::query()->whereName( 'Platonism' )->firstOrFail();
+        $virtueEthics = Idea::query()->whereName( 'Virtue Ethics' )->firstOrFail();
+        $pantheism    = Idea::query()->whereName( 'Pantheism' )->firstOrFail();
+        $democracy    = Idea::query()->whereName( 'Democracy' )->firstOrFail();
+        $rationalism  = Idea::query()->whereName( 'Rationalism' )->firstOrFail();
+
+        $socreates = Character::factory( [
             'name'  => 'Socrates',
             'era'   => 'Socratic',
             'level' => 12,
         ] )->for( $game )->create();
+        $socreates->ideas()->attach( $platonism->id, [ 'type' => 'major' ] );
+        $socreates->ideas()->attach( $virtueEthics->id, [ 'type' => 'major' ] );
+        $socreates->ideas()->attach( $democracy->id, [ 'type' => 'major' ] );
+        $socreates->ideas()->attach( $pantheism->id, [ 'type' => 'major' ] );
+        $socreates->ideas()->attach( $rationalism->id, [ 'type' => 'major' ] );
+
         Character::factory( [
             'name'  => 'Aristotle',
             'era'   => 'Socratic',

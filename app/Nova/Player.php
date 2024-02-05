@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\SummonCharacter;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\BelongsTo;
@@ -108,6 +109,6 @@ class Player extends Resource {
      * @return array
      */
     public function actions( NovaRequest $request ) {
-        return [];
+        return [ new SummonCharacter ];
     }
 }

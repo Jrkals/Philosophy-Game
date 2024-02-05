@@ -48,8 +48,4 @@ class Game extends Model {
             $player->calculateAdjustedPointsTotal();
         }
     }
-
-    public function summonCharacter( Character $character, Player $player ) {
-
-    }
 }

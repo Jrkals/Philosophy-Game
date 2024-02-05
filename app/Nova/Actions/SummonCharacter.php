@@ -12,9 +12,9 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 class SummonCharacter extends Action {
 
     public function handle( ActionFields $fields, Collection $models ) {
-        $game      = $models->first();
+        $player    = $models->first();
         $character = Character::query()->whereName( $fields->name )->firstOrFail();
-        $game->summonCharacter( $character );
+        $player->summonCharacter( $character );
     }
 
     public function fields( NovaRequest $request ) {

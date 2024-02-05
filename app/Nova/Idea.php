@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
@@ -66,7 +67,8 @@ class Idea extends Resource {
                 ->rules( 'required', 'max:254' ),
             Number::make( 'Points', 'points' )->sortable()->filterable()->default( 0 ),
             Boolean::make( 'Winner', 'winner' )->default( false ),
-            BelongsTo::make( 'Game' )
+            BelongsTo::make( 'Game' ),
+            BelongsToMany::make( 'Characters', 'characters', CharacterResource::class ),
         ];
     }
 
