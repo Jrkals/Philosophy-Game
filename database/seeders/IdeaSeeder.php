@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Character;
 use App\Models\Game;
 use App\Models\Idea;
 
 class IdeaSeeder extends \Illuminate\Database\Seeder {
 
-    public function run( Game $game ): void {
+    public function seedIdeas( Game $game ): void {
         if ( ! $game ) {
             $gam = Game::factory()->create();
         }
@@ -98,6 +99,39 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $pantheism           = Idea::factory( [
             'name'     => 'Empiricism',
             'category' => 'Epistemology'
+        ] )->for( $game )->create();
+    }
+
+    public function seedCharacters( Game $game ): void {
+        Character::factory( [
+            'name'  => 'Socrates',
+            'era'   => 'Socratic',
+            'level' => 12,
+        ] )->for( $game )->create();
+        Character::factory( [
+            'name'  => 'Aristotle',
+            'era'   => 'Socratic',
+            'level' => 12,
+        ] )->for( $game )->create();
+        Character::factory( [
+            'name'  => 'Plato',
+            'era'   => 'Socratic',
+            'level' => 12,
+        ] )->for( $game )->create();
+        Character::factory( [
+            'name'  => 'Epicurus',
+            'era'   => 'Socratic',
+            'level' => 7,
+        ] )->for( $game )->create();
+        Character::factory( [
+            'name'  => 'Xenophone',
+            'era'   => 'Socratic',
+            'level' => 5,
+        ] )->for( $game )->create();
+        Character::factory( [
+            'name'  => 'Thucydides',
+            'era'   => 'Socratic',
+            'level' => 6,
         ] )->for( $game )->create();
     }
 }

@@ -6,6 +6,7 @@ use App\Nova\Actions\NextRound;
 use App\Nova\Actions\NextTurn;
 use App\Nova\Actions\refreshScore;
 use App\Nova\Actions\SeedIdeas;
+use App\Nova\Actions\SummonCharacter;
 use App\Nova\Metrics\Round;
 use App\Nova\Metrics\Turn;
 use Illuminate\Http\Request;
@@ -113,6 +114,6 @@ class Game extends Resource {
      * @return array
      */
     public function actions( NovaRequest $request ) {
-        return [ new refreshScore, new SeedIdeas, new NextRound, new NextTurn ];
+        return [ new refreshScore, new SeedIdeas, new NextRound, new NextTurn, new SummonCharacter ];
     }
 }

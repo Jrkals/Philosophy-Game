@@ -27,7 +27,8 @@ class SeedIdeas extends DestructiveAction {
     public function handle( ActionFields $fields, Collection $models ) {
         $game       = $models->first();
         $ideaSeeder = new IdeaSeeder( $game );
-        $ideaSeeder->run( $game );
+        $ideaSeeder->seedIdeas( $game );
+        $ideaSeeder->seedCharacters( $game );
     }
 
     /**

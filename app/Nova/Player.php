@@ -54,7 +54,7 @@ class Player extends Resource {
      */
     public function fields( NovaRequest $request ) {
         return [
-            ID::make()->sortable(),
+            ID::make()->sortable()->hideFromIndex(),
 
             Text::make( 'Name', 'name' )
                 ->sortable()
