@@ -63,8 +63,8 @@ class Player extends Model {
                 'idea_id'   => $idea->id,
                 'amount'    => $this->getIdeaAmount( $idea->pivot->type ),
                 'player_id' => $this->id,
-                'round'     => $character->game->round,
-                'turn'      => $character->game->turn,
+                'round'     => $character->game->current_round,
+                'turn'      => $character->game->current_turn,
             ] );
             $transaction->save();
         }

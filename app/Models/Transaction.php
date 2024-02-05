@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model {
     use HasFactory;
 
+    protected $fillable = [
+        'game_id',
+        'idea_id',
+        'player_id',
+        'amount',
+        'turn',
+        'round'
+    ];
+
     protected $casts = [
         'counted' => 'boolean'
     ];

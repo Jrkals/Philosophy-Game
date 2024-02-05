@@ -13,7 +13,7 @@ class SummonCharacter extends Action {
 
     public function handle( ActionFields $fields, Collection $models ) {
         $player    = $models->first();
-        $character = Character::query()->whereName( $fields->name )->firstOrFail();
+        $character = Character::query()->whereName( $fields->name )->whereGameId( $player->game_id )->firstOrFail();
         $player->summonCharacter( $character );
     }
 
