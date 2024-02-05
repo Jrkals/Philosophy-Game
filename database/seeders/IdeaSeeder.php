@@ -103,22 +103,27 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
     }
 
     public function seedCharacters( Game $game ): void {
-        $platonism    = Idea::query()->whereName( 'Platonism' )->firstOrFail();
-        $virtueEthics = Idea::query()->whereName( 'Virtue Ethics' )->firstOrFail();
-        $pantheism    = Idea::query()->whereName( 'Pantheism' )->firstOrFail();
-        $democracy    = Idea::query()->whereName( 'Democracy' )->firstOrFail();
-        $rationalism  = Idea::query()->whereName( 'Rationalism' )->firstOrFail();
+        $platonism    = Idea::query()->whereName( 'Platonism' )->whereGameId( $game->id )
+                            ->firstOrFail();
+        $virtueEthics = Idea::query()->whereName( 'Virtue Ethics' )->whereGameId( $game->id )
+                            ->firstOrFail();
+        $pantheism    = Idea::query()->whereName( 'Pantheism' )->whereGameId( $game->id )
+                            ->firstOrFail();
+        $democracy    = Idea::query()->whereName( 'Democracy' )->whereGameId( $game->id )
+                            ->firstOrFail();
+        $rationalism  = Idea::query()->whereName( 'Rationalism' )->whereGameId( $game->id )
+                            ->firstOrFail();
 
-        $socreates = Character::factory( [
+        $socrates = Character::factory( [
             'name'  => 'Socrates',
             'era'   => 'Socratic',
             'level' => 12,
         ] )->for( $game )->create();
-        $socreates->ideas()->attach( $platonism->id, [ 'type' => 'major' ] );
-        $socreates->ideas()->attach( $virtueEthics->id, [ 'type' => 'major' ] );
-        $socreates->ideas()->attach( $democracy->id, [ 'type' => 'major' ] );
-        $socreates->ideas()->attach( $pantheism->id, [ 'type' => 'major' ] );
-        $socreates->ideas()->attach( $rationalism->id, [ 'type' => 'major' ] );
+        $socrates->ideas()->attach( $platonism->id, [ 'type' => 'major' ] );
+        $socrates->ideas()->attach( $virtueEthics->id, [ 'type' => 'major' ] );
+        $socrates->ideas()->attach( $democracy->id, [ 'type' => 'major' ] );
+        $socrates->ideas()->attach( $pantheism->id, [ 'type' => 'major' ] );
+        $socrates->ideas()->attach( $rationalism->id, [ 'type' => 'major' ] );
 
         Character::factory( [
             'name'  => 'Aristotle',
