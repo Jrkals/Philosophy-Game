@@ -41,8 +41,6 @@ class Player extends Model {
         $this->adjusted = $this->total;
 
         foreach ( $this->transactions as $transaction ) {
-            $a = $categoryLead[ $transaction->idea->category ];
-            $b = $transaction->idea->name;
             if ( $categoryLead[ $transaction->idea->category ] !== $transaction->idea->name ) {
                 $this->adjusted -= $transaction->amount;
                 continue;

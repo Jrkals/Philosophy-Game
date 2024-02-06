@@ -130,25 +130,35 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
             'era'   => 'Socratic',
             'level' => 12,
         ] )->for( $game )->create();
+
+
         Character::factory( [
             'name'  => 'Plato',
             'era'   => 'Socratic',
             'level' => 12,
         ] )->for( $game )->create();
+
+
         Character::factory( [
             'name'  => 'Epicurus',
             'era'   => 'Socratic',
             'level' => 7,
         ] )->for( $game )->create();
+
+
         Character::factory( [
             'name'  => 'Xenophone',
             'era'   => 'Socratic',
             'level' => 5,
         ] )->for( $game )->create();
+
+
         Character::factory( [
             'name'  => 'Thucydides',
             'era'   => 'Socratic',
             'level' => 6,
         ] )->for( $game )->create();
+
+
     }
 }
