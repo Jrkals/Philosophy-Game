@@ -41,11 +41,11 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
             'category' => 'Politics'
         ] )->for( $game )->create();
         $pantheism           = Idea::factory( [
-            'name'     => 'Jesus is God',
+            'name'     => 'Jesus Deity',
             'category' => 'Jesus'
         ] )->for( $game )->create();
         $pantheism           = Idea::factory( [
-            'name'     => 'Jesus is mere man',
+            'name'     => 'Jesus Mere Humanity',
             'category' => 'Jesus'
         ] )->for( $game )->create();
         $materialiasm        = Idea::factory( [
@@ -125,40 +125,180 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $socrates->ideas()->attach( $pantheism->id, [ 'type' => 'major' ] );
         $socrates->ideas()->attach( $rationalism->id, [ 'type' => 'major' ] );
 
-        Character::factory( [
+        $classicalTheism = Idea::query()->whereName( 'Classical Theism' )->whereGameId( $game->id )
+                               ->firstOrFail();
+        $hylomorphism    = Idea::query()->whereName( 'Hylomorphism' )->whereGameId( $game->id )
+                               ->firstOrFail();
+        $empiricism      = Idea::query()->whereName( 'Empiricism' )->whereGameId( $game->id )
+                               ->firstOrFail();
+        $aristocracy     = Idea::query()->whereName( 'Aristocracy' )->whereGameId( $game->id )
+                               ->firstOrFail();
+        $aristotle       = Character::factory( [
             'name'  => 'Aristotle',
             'era'   => 'Socratic',
             'level' => 12,
         ] )->for( $game )->create();
+        $aristotle->ideas()->attach( $classicalTheism->id, [ 'type' => 'founding' ] );
+        $aristotle->ideas()->attach( $virtueEthics->id, [ 'type' => 'founding' ] );
+        $aristotle->ideas()->attach( $hylomorphism->id, [ 'type' => 'founding' ] );
+        $aristotle->ideas()->attach( $aristocracy->id, [ 'type' => 'major' ] );
+        $aristotle->ideas()->attach( $empiricism->id, [ 'type' => 'major' ] );
 
-
-        Character::factory( [
+        $plato = Character::factory( [
             'name'  => 'Plato',
             'era'   => 'Socratic',
             'level' => 12,
         ] )->for( $game )->create();
+        $plato->ideas()->attach( $platonism->id, [ 'type' => 'founding' ] );
+        $plato->ideas()->attach( $aristocracy->id, [ 'type' => 'major' ] );
+        $plato->ideas()->attach( $rationalism->id, [ 'type' => 'major' ] );
+        $plato->ideas()->attach( $pantheism->id, [ 'type' => 'minor' ] );
 
-
-        Character::factory( [
+        $materialism = Idea::query()->whereName( 'Materialism' )->whereGameId( $game->id )
+                           ->firstOrFail();
+        $atheism     = Idea::query()->whereName( 'Atheism' )->whereGameId( $game->id )
+                           ->firstOrFail();
+        $epicurus    = Character::factory( [
             'name'  => 'Epicurus',
             'era'   => 'Socratic',
             'level' => 7,
         ] )->for( $game )->create();
+        $epicurus->ideas()->attach( $atheism->id, [ 'type' => 'founding' ] );
+        $epicurus->ideas()->attach( $empiricism->id, [ 'type' => 'founding' ] );
+        $epicurus->ideas()->attach( $materialism->id, [ 'type' => 'major' ] );
 
 
-        Character::factory( [
-            'name'  => 'Xenophone',
+        $xenophon = Character::factory( [
+            'name'  => 'Xenophon',
             'era'   => 'Socratic',
             'level' => 5,
         ] )->for( $game )->create();
+        $xenophon->ideas()->attach( $pantheism->id, [ 'type' => 'minor' ] );
+        $xenophon->ideas()->attach( $democracy->id, [ 'type' => 'minor' ] );
+        $xenophon->ideas()->attach( $empiricism->id, [ 'type' => 'minor' ] );
 
-
-        Character::factory( [
+        $thucydides = Character::factory( [
             'name'  => 'Thucydides',
             'era'   => 'Socratic',
             'level' => 6,
         ] )->for( $game )->create();
+        $thucydides->ideas()->attach( $aristocracy->id, [ 'type' => 'major' ] );
+        $thucydides->ideas()->attach( $atheism->id, [ 'type' => 'minor' ] );
+        $thucydides->ideas()->attach( $empiricism->id, [ 'type' => 'minor' ] );
 
+        $freeWill      = Idea::query()->whereName( 'Free Will' )->whereGameId( $game->id )
+                             ->firstOrFail();
+        $scholasticism = Idea::query()->whereName( 'Scholasticism' )->whereGameId( $game->id )
+                             ->firstOrFail();
+        $deontology    = Idea::query()->whereName( 'Deontology' )->whereGameId( $game->id )
+                             ->firstOrFail();
+        $scotus        = Character::factory( [
+            'name'  => 'Duns Scotus',
+            'era'   => 'Medieval',
+            'level' => 9,
+        ] )->for( $game )->create();
+        $scotus->ideas()->attach( $freeWill->id, [ 'type' => 'major' ] );
+        $scotus->ideas()->attach( $classicalTheism->id, [ 'type' => 'major' ] );
+        $scotus->ideas()->attach( $scholasticism->id, [ 'type' => 'major' ] );
+        $scotus->ideas()->attach( $deontology->id, [ 'type' => 'minor' ] );
+
+        $jesusDeity = Idea::query()->whereName( 'Jesus Deity' )->whereGameId( $game->id )
+                          ->firstOrFail();
+        $augustine  = Character::factory( [
+            'name'  => 'Augustine',
+            'era'   => 'Medieval',
+            'level' => 10,
+        ] )->for( $game )->create();
+        $augustine->ideas()->attach( $classicalTheism->id, [ 'type' => 'major' ] );
+        $augustine->ideas()->attach( $platonism->id, [ 'type' => 'major' ] );
+        $augustine->ideas()->attach( $jesusDeity->id, [ 'type' => 'major' ] );
+        $augustine->ideas()->attach( $virtueEthics->id, [ 'type' => 'minor' ] );
+        $augustine->ideas()->attach( $rationalism->id, [ 'type' => 'minor' ] );
+
+        $monarchy = Idea::query()->whereName( 'Monarchy' )->whereGameId( $game->id )
+                        ->firstOrFail();
+        $aquinas  = Character::factory( [
+            'name'  => 'Aquinas',
+            'era'   => 'Medieval',
+            'level' => 11,
+        ] )->for( $game )->create();
+        $aquinas->ideas()->attach( $scholasticism->id, [ 'type' => 'founding' ] );
+        $aquinas->ideas()->attach( $classicalTheism->id, [ 'type' => 'major' ] );
+        $aquinas->ideas()->attach( $virtueEthics->id, [ 'type' => 'major' ] );
+        $aquinas->ideas()->attach( $hylomorphism->id, [ 'type' => 'major' ] );
+        $aquinas->ideas()->attach( $jesusDeity->id, [ 'type' => 'minor' ] );
+        $aquinas->ideas()->attach( $monarchy->id, [ 'type' => 'minor' ] );
+        $aquinas->ideas()->attach( $freeWill->id, [ 'type' => 'minor' ] );
+
+        $nominalism          = Idea::query()->whereName( 'Nominalism' )->whereGameId( $game->id )
+                                   ->firstOrFail();
+        $theisticPersonalism = Idea::query()->whereName( 'Theistic Personalism' )->whereGameId( $game->id )
+                                   ->firstOrFail();
+        $ockham              = Character::factory( [
+            'name'  => 'Ockham',
+            'era'   => 'Medieval',
+            'level' => 9,
+        ] )->for( $game )->create();
+        $ockham->ideas()->attach( $nominalism->id, [ 'type' => 'founding' ] );
+        $ockham->ideas()->attach( $theisticPersonalism->id, [ 'type' => 'major' ] );
+        $ockham->ideas()->attach( $deontology->id, [ 'type' => 'major' ] );
+        $ockham->ideas()->attach( $freeWill->id, [ 'type' => 'major' ] );
+        $ockham->ideas()->attach( $jesusDeity->id, [ 'type' => 'minor' ] );
+        $ockham->ideas()->attach( $scholasticism->id, [ 'type' => 'minor' ] );
+
+
+        $albertusMagnus = Character::factory( [
+            'name'  => 'Albertus Magnus',
+            'era'   => 'Medieval',
+            'level' => 7,
+        ] )->for( $game )->create();
+        $albertusMagnus->ideas()->attach( $empiricism->id, [ 'type' => 'major' ] );
+        $albertusMagnus->ideas()->attach( $scholasticism->id, [ 'type' => 'minor' ] );
+        $albertusMagnus->ideas()->attach( $classicalTheism->id, [ 'type' => 'minor' ] );
+        $albertusMagnus->ideas()->attach( $jesusDeity->id, [ 'type' => 'minor' ] );
+        $albertusMagnus->ideas()->attach( $hylomorphism->id, [ 'type' => 'minor' ] );
+
+        $boethius = Character::factory( [
+            'name'  => 'Boethius',
+            'era'   => 'Medieval',
+            'level' => 6,
+        ] )->for( $game )->create();
+
+        $anselm = Character::factory( [
+            'name'  => 'Anselm',
+            'era'   => 'Medieval',
+            'level' => 8,
+        ] )->for( $game )->create();
+
+        $bonaventure = Character::factory( [
+            'name'  => 'Bonaventure',
+            'era'   => 'Medieval',
+            'level' => 9,
+        ] )->for( $game )->create();
+
+        $maimonedes = Character::factory( [
+            'name'  => 'Maimonedes',
+            'era'   => 'Medieval',
+            'level' => 5,
+        ] )->for( $game )->create();
+
+        $averroes = Character::factory( [
+            'name'  => 'Averroes',
+            'era'   => 'Medieval',
+            'level' => 8,
+        ] )->for( $game )->create();
+
+        $avicenna = Character::factory( [
+            'name'  => 'Avicenna',
+            'era'   => 'Medieval',
+            'level' => 8,
+        ] )->for( $game )->create();
+
+        $alGhazali = Character::factory( [
+            'name'  => 'Al Ghazali',
+            'era'   => 'Medieval',
+            'level' => 4,
+        ] )->for( $game )->create();
 
     }
 }
