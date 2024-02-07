@@ -263,12 +263,20 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
             'era'   => 'Medieval',
             'level' => 6,
         ] )->for( $game )->create();
+        $boethius->ideas()->attach( $platonism->id, [ 'type' => 'major' ] );
+        $boethius->ideas()->attach( $classicalTheism->id, [ 'type' => 'minor' ] );
+        $boethius->ideas()->attach( $jesusDeity->id, [ 'type' => 'minor' ] );
 
         $anselm = Character::factory( [
             'name'  => 'Anselm',
             'era'   => 'Medieval',
             'level' => 8,
         ] )->for( $game )->create();
+        $anselm->ideas()->attach( $platonism->id, [ 'type' => 'major' ] );
+        $anselm->ideas()->attach( $jesusDeity->id, [ 'type' => 'major' ] );
+        $anselm->ideas()->attach( $rationalism->id, [ 'type' => 'major' ] );
+        $anselm->ideas()->attach( $deontology->id, [ 'type' => 'minor' ] );
+        $anselm->ideas()->attach( $classicalTheism->id, [ 'type' => 'minor' ] );
 
         $bonaventure = Character::factory( [
             'name'  => 'Bonaventure',
@@ -299,6 +307,9 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
             'era'   => 'Medieval',
             'level' => 4,
         ] )->for( $game )->create();
+        $alGhazali->ideas()->attach( $classicalTheism->id, [ 'type' => 'major' ] );
+        $alGhazali->ideas()->attach( $determinism->id, [ 'type' => 'major' ] );
+        $alGhazali->ideas()->attach( $jesusMereHumanity->id, [ 'type' => 'minor' ] );
 
     }
 }
