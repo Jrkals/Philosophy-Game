@@ -69,6 +69,7 @@ class Game extends Resource {
             HasMany::make( 'Players' ),
             HasMany::make( 'Ideas' ),
             HasMany::make( 'Transactions' ),
+            HasMany::make( 'Characters', 'characters', CharacterResource::class ),
 
         ];
     }

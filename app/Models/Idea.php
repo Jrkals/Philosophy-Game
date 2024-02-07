@@ -12,6 +12,11 @@ class Idea extends Model {
     public $casts = [
         'winner' => 'boolean'
     ];
+    protected $fillable = [
+        'game_id',
+        'name',
+        'category'
+    ];
 
     public static function getCategoryForName( string $name ) {
         return Idea::query()->where( 'name', $name )->first()->category;

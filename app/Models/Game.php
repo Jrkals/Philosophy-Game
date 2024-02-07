@@ -20,6 +20,10 @@ class Game extends Model {
         return $this->hasMany( Idea::class );
     }
 
+    public function characters() {
+        return $this->hasMany( Character::class );
+    }
+
     public function calculateScore(): void {
         $recentTransactions = Transaction::query()->where( 'counted', false )->get();
         foreach ( $recentTransactions as $transaction ) {

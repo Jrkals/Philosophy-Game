@@ -343,7 +343,7 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $alGhazali->ideas()->attach( $determinism->id, [ 'type' => 'major' ] );
         $alGhazali->ideas()->attach( $jesusMereHumanity->id, [ 'type' => 'minor' ] );
 
-        $analyticism = Idea::query()->whereGameId( $game->id )->whereName( 'Analytic' )->create();
+        $analyticism = Idea::query()->whereGameId( $game->id )->whereName( 'Analytic' )->firstOrFail();
         $plantinga   = Character::factory( [
             'name'  => 'Alvin Plantinga',
             'era'   => 'Postmodern',
@@ -365,7 +365,7 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $wlc->ideas()->attach( $nominalism->id, [ 'type' => 'minor' ] );
         $wlc->ideas()->attach( $deontology->id, [ 'type' => 'minor' ] );
 
-        $continentalism = Idea::query()->whereGameId( $game->id )->whereName( 'Continental' )->create();
+        $continentalism = Idea::query()->whereGameId( $game->id )->whereName( 'Continental' )->firstOrFail();
         $jpii           = Character::factory( [
             'name'  => 'John Paul II',
             'era'   => 'Postmodern',
@@ -377,7 +377,7 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $jpii->ideas()->attach( $continentalism->id, [ 'type' => 'minor' ] );
         $jpii->ideas()->attach( $hylomorphism->id, [ 'type' => 'minor' ] );
 
-        $nihilism  = Idea::query()->whereGameId( $game->id )->whereName( 'Continental' )->create();
+        $nihilism  = Idea::query()->whereGameId( $game->id )->whereName( 'Continental' )->firstOrFail();
         $heidegger = Character::factory( [
             'name'  => 'Heidegger',
             'era'   => 'Postmodern',

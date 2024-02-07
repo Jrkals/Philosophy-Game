@@ -12,6 +12,7 @@ use Laravel\Nova\Resource;
 
 class CharacterResource extends Resource {
     public static $model = Character::class;
+    public static $perPageViaRelationship = 45;
 
     /**
      * @inheritDoc
