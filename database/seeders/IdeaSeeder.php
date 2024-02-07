@@ -100,6 +100,14 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
             'name'     => 'Empiricism',
             'category' => 'Epistemology'
         ] )->for( $game )->create();
+        $freeWill            = Idea::factory( [
+            'name'     => 'Free Will',
+            'category' => 'Free Will'
+        ] )->for( $game )->create();
+        $determinism         = Idea::factory( [
+            'name'     => 'Determinism',
+            'category' => 'Free Will'
+        ] )->for( $game )->create();
     }
 
     public function seedCharacters( Game $game ): void {
@@ -283,26 +291,50 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
             'era'   => 'Medieval',
             'level' => 9,
         ] )->for( $game )->create();
+        $bonaventure->ideas()->attach( $platonism->id, [ 'type' => 'major' ] );
+        $bonaventure->ideas()->attach( $classicalTheism->id, [ 'type' => 'major' ] );
+        $bonaventure->ideas()->attach( $rationalism->id, [ 'type' => 'major' ] );
+        $bonaventure->ideas()->attach( $deontology->id, [ 'type' => 'minor' ] );
+        $bonaventure->ideas()->attach( $jesusDeity->id, [ 'type' => 'minor' ] );
+        $bonaventure->ideas()->attach( $scholasticism->id, [ 'type' => 'minor' ] );
 
-        $maimonedes = Character::factory( [
+        $jesusMereHumanity = Idea::query()->whereName( 'Jesus Mere Humanity' )
+                                 ->whereGameId( $game->id )
+                                 ->firstOrFail();
+        $maimonedes        = Character::factory( [
             'name'  => 'Maimonedes',
             'era'   => 'Medieval',
             'level' => 5,
         ] )->for( $game )->create();
+        $maimonedes->ideas()->attach( $classicalTheism->id, [ 'type' => 'major' ] );
+        $maimonedes->ideas()->attach( $jesusMereHumanity->id, [ 'type' => 'minor' ] );
+        $maimonedes->ideas()->attach( $scholasticism->id, [ 'type' => 'major' ] );
 
         $averroes = Character::factory( [
             'name'  => 'Averroes',
             'era'   => 'Medieval',
             'level' => 8,
         ] )->for( $game )->create();
+        $averroes->ideas()->attach( $rationalism->id, [ 'type' => 'founding' ] );
+        $averroes->ideas()->attach( $classicalTheism->id, [ 'type' => 'major' ] );
+        $averroes->ideas()->attach( $hylomorphism->id, [ 'type' => 'major' ] );
+        $averroes->ideas()->attach( $monarchy->id, [ 'type' => 'major' ] );
+        $averroes->ideas()->attach( $jesusMereHumanity->id, [ 'type' => 'minor' ] );
 
         $avicenna = Character::factory( [
             'name'  => 'Avicenna',
             'era'   => 'Medieval',
             'level' => 8,
         ] )->for( $game )->create();
+        $avicenna->ideas()->attach( $hylomorphism->id, [ 'type' => 'major' ] );
+        $avicenna->ideas()->attach( $classicalTheism->id, [ 'type' => 'major' ] );
+        $avicenna->ideas()->attach( $empiricism->id, [ 'type' => 'major' ] );
+        $avicenna->ideas()->attach( $jesusMereHumanity->id, [ 'type' => 'minor' ] );
+        $avicenna->ideas()->attach( $freeWill->id, [ 'type' => 'major' ] );
+        $avicenna->ideas()->attach( $monarchy->id, [ 'type' => 'minor' ] );
 
-        $alGhazali = Character::factory( [
+        $determinism = Idea::query()->whereName( 'Determinism' )->whereGameId( $game->id )->firstOrFail();
+        $alGhazali   = Character::factory( [
             'name'  => 'Al Ghazali',
             'era'   => 'Medieval',
             'level' => 4,
@@ -310,6 +342,148 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $alGhazali->ideas()->attach( $classicalTheism->id, [ 'type' => 'major' ] );
         $alGhazali->ideas()->attach( $determinism->id, [ 'type' => 'major' ] );
         $alGhazali->ideas()->attach( $jesusMereHumanity->id, [ 'type' => 'minor' ] );
+
+        $analyticism = Idea::query()->whereGameId( $game->id )->whereName( 'Analytic' )->create();
+        $plantinga   = Character::factory( [
+            'name'  => 'Alvin Plantinga',
+            'era'   => 'Postmodern',
+            'level' => 7,
+        ] )->for( $game )->create();
+        $plantinga->ideas()->attach( $theisticPersonalism->id, [ 'type' => 'founding' ] );
+        $plantinga->ideas()->attach( $analyticism->id, [ 'type' => 'major' ] );
+        $plantinga->ideas()->attach( $deontology->id, [ 'type' => 'minor' ] );
+
+        $wlc = Character::factory( [
+            'name'  => 'William Lane Craig',
+            'era'   => 'Postmodern',
+            'level' => 6,
+        ] )->for( $game )->create();
+        $wlc->ideas()->attach( $theisticPersonalism->id, [ 'type' => 'major' ] );
+        $wlc->ideas()->attach( $analyticism->id, [ 'type' => 'major' ] );
+        $wlc->ideas()->attach( $jesusDeity->id, [ 'type' => 'major' ] );
+        $wlc->ideas()->attach( $freeWill->id, [ 'type' => 'minor' ] );
+        $wlc->ideas()->attach( $nominalism->id, [ 'type' => 'minor' ] );
+        $wlc->ideas()->attach( $deontology->id, [ 'type' => 'minor' ] );
+
+        $continentalism = Idea::query()->whereGameId( $game->id )->whereName( 'Continental' )->create();
+        $jpii           = Character::factory( [
+            'name'  => 'John Paul II',
+            'era'   => 'Postmodern',
+            'level' => 6,
+        ] )->for( $game )->create();
+        $jpii->ideas()->attach( $virtueEthics->id, [ 'type' => 'major' ] );
+        $jpii->ideas()->attach( $democracy->id, [ 'type' => 'major' ] );
+        $jpii->ideas()->attach( $jesusDeity->id, [ 'type' => 'major' ] );
+        $jpii->ideas()->attach( $continentalism->id, [ 'type' => 'minor' ] );
+        $jpii->ideas()->attach( $hylomorphism->id, [ 'type' => 'minor' ] );
+
+        $nihilism  = Idea::query()->whereGameId( $game->id )->whereName( 'Continental' )->create();
+        $heidegger = Character::factory( [
+            'name'  => 'Heidegger',
+            'era'   => 'Postmodern',
+            'level' => 5,
+        ] )->for( $game )->create();
+        $heidegger->ideas()->attach( $continentalism->id, [ 'type' => 'major' ] );
+        $heidegger->ideas()->attach( $nihilism->id, [ 'type' => 'major' ] );
+        $heidegger->ideas()->attach( $atheism->id, [ 'type' => 'minor' ] );
+
+        $feser = Character::factory( [
+            'name'  => 'Ed Feser',
+            'era'   => 'Postmodern',
+            'level' => 4,
+        ] )->for( $game )->create();
+        $feser->ideas()->attach( $hylomorphism->id, [ 'type' => 'major' ] );
+        $feser->ideas()->attach( $classicalTheism->id, [ 'type' => 'major' ] );
+        $feser->ideas()->attach( $virtueEthics->id, [ 'type' => 'major' ] );
+        $feser->ideas()->attach( $scholasticism->id, [ 'type' => 'minor' ] );
+
+        $mackie = Character::factory( [
+            'name'  => 'J.L. Mackie',
+            'era'   => 'Postmodern',
+            'level' => 6,
+        ] )->for( $game )->create();
+        $mackie->ideas()->attach( $atheism->id, [ 'type' => 'major' ] );
+        $mackie->ideas()->attach( $jesusMereHumanity->id, [ 'type' => 'major' ] );
+        $mackie->ideas()->attach( $analyticism->id, [ 'type' => 'major' ] );
+        $mackie->ideas()->attach( $atheism->id, [ 'type' => 'major' ] );
+
+        $russell = Character::factory( [
+            'name'  => 'Bertrand Russell',
+            'era'   => 'Postmodern',
+            'level' => 9,
+        ] )->for( $game )->create();
+        $russell->ideas()->attach( $atheism->id, [ 'type' => 'major' ] );
+        $russell->ideas()->attach( $nihilism->id, [ 'type' => 'major' ] );
+        $russell->ideas()->attach( $analyticism->id, [ 'type' => 'founding' ] );
+        $russell->ideas()->attach( $nominalism->id, [ 'type' => 'major' ] );
+        $russell->ideas()->attach( $determinism->id, [ 'type' => 'major' ] );
+        $russell->ideas()->attach( $democracy->id, [ 'type' => 'minor' ] );
+
+        $pruss = Character::factory( [
+            'name'  => 'Alexander Pruss',
+            'era'   => 'Postmodern',
+            'level' => 7,
+        ] )->for( $game )->create();
+        $pruss->ideas()->attach( $classicalTheism->id, [ 'type' => 'major' ] );
+        $pruss->ideas()->attach( $virtueEthics->id, [ 'type' => 'major' ] );
+        $pruss->ideas()->attach( $analyticism->id, [ 'type' => 'major' ] );
+        $pruss->ideas()->attach( $jesusDeity->id, [ 'type' => 'minor' ] );
+        $pruss->ideas()->attach( $hylomorphism->id, [ 'type' => 'minor' ] );
+        $pruss->ideas()->attach( $freeWill->id, [ 'type' => 'minor' ] );
+
+        $alexRosenberg = Character::factory( [
+            'name'  => 'Alex Rosenberg',
+            'era'   => 'Postmodern',
+            'level' => 4,
+        ] )->for( $game )->create();
+        $alexRosenberg->ideas()->attach( $atheism->id, [ 'type' => 'major' ] );
+        $alexRosenberg->ideas()->attach( $nihilism->id, [ 'type' => 'major' ] );
+        $alexRosenberg->ideas()->attach( $empiricism->id, [ 'type' => 'major' ] );
+        $alexRosenberg->ideas()->attach( $materialism->id, [ 'type' => 'major' ] );
+        $alexRosenberg->ideas()->attach( $analyticism->id, [ 'type' => 'minor' ] );
+        $alexRosenberg->ideas()->attach( $determinism->id, [ 'type' => 'minor' ] );
+
+        $dawkins = Character::factory( [
+            'name'  => 'Richard Dawkins',
+            'era'   => 'Postmodern',
+            'level' => 3,
+        ] )->for( $game )->create();
+        $dawkins->ideas()->attach( $atheism->id, [ 'type' => 'major' ] );
+        $dawkins->ideas()->attach( $nihilism->id, [ 'type' => 'minor' ] );
+        $dawkins->ideas()->attach( $jesusMereHumanity->id, [ 'type' => 'major' ] );
+        $dawkins->ideas()->attach( $materialism->id, [ 'type' => 'major' ] );
+        $dawkins->ideas()->attach( $empiricism->id, [ 'type' => 'major' ] );
+
+        $harris = Character::factory( [
+            'name'  => 'Sam Harris',
+            'era'   => 'Postmodern',
+            'level' => 3,
+        ] )->for( $game )->create();
+        $harris->ideas()->attach( $atheism->id, [ 'type' => 'major' ] );
+        $harris->ideas()->attach( $jesusMereHumanity->id, [ 'type' => 'minor' ] );
+        $harris->ideas()->attach( $materialism->id, [ 'type' => 'major' ] );
+        $harris->ideas()->attach( $empiricism->id, [ 'type' => 'major' ] );
+
+        $swinburne = Character::factory( [
+            'name'  => 'Richard Swinburne',
+            'era'   => 'Postmodern',
+            'level' => 6,
+        ] )->for( $game )->create();
+        $swinburne->ideas()->attach( $analyticism->id, [ 'type' => 'major' ] );
+        $swinburne->ideas()->attach( $theisticPersonalism->id, [ 'type' => 'major' ] );
+        $swinburne->ideas()->attach( $deontology->id, [ 'type' => 'major' ] );
+        $swinburne->ideas()->attach( $freeWill->id, [ 'type' => 'minor' ] );
+
+        $sartre = Character::factory( [
+            'name'  => 'Jean Paul Sartre',
+            'era'   => 'Postmodern',
+            'level' => 8,
+        ] )->for( $game )->create();
+        $sartre->ideas()->attach( $freeWill->id, [ 'type' => 'major' ] );
+        $sartre->ideas()->attach( $continentalism->id, [ 'type' => 'major' ] );
+        $sartre->ideas()->attach( $nihilism->id, [ 'type' => 'major' ] );
+        $sartre->ideas()->attach( $atheism->id, [ 'type' => 'major' ] );
+        $sartre->ideas()->attach( $jesusMereHumanity->id, [ 'type' => 'minor' ] );
 
     }
 }
