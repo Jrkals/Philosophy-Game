@@ -25,7 +25,7 @@ class Game extends Model {
     }
 
     public function calculateScore(): void {
-        $recentTransactions = Transaction::query()->where( 'counted', false )->get();
+        $recentTransactions = Transaction::query()->where( 'counted', false )->whereGameId( $this->id )->get();
         foreach ( $recentTransactions as $transaction ) {
             if ( $transaction->player ) {
                 $transaction->countTransactionToPlayer();

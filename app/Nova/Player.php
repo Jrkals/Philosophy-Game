@@ -42,9 +42,9 @@ class Player extends Resource {
     public static $perPageViaRelationship = 8;
 
 
-    public static function relatableQuery( NovaRequest $request, $query ) {
-        return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) );
-    }
+//    public static function relatableQuery( NovaRequest $request, $query ) {
+//        return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) );
+//    }
 
     /**
      * Get the fields displayed by the resource.
@@ -63,7 +63,7 @@ class Player extends Resource {
             Number::make( 'Total', 'total' )->sortable()->default( 0 ),
             Number::make( 'Adjusted', 'adjusted' )->sortable()->default( 0 ),
             BelongsTo::make( 'Game' ),
-            HasMany::make( 'Transactions' ),
+            HasMany::make( 'Transactions', 'transactions', Transaction::class ),
 
         ];
     }

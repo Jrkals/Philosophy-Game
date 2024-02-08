@@ -34,4 +34,8 @@ class Idea extends Model {
     public function characters(): BelongsToMany {
         return $this->belongsToMany( Character::class, 'character_ideas' )->withPivot( 'type' );
     }
+
+    public function transactions(): \Illuminate\Database\Eloquent\Relations\HasMany {
+        return $this->hasMany( Transaction::class );
+    }
 }

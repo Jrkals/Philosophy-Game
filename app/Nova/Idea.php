@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
@@ -42,9 +43,9 @@ class Idea extends Resource {
 
     public static $perPageViaRelationship = 25;
 
-    public static function relatableQuery( NovaRequest $request, $query ) {
-        return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) );
-    }
+//    public static function relatableQuery( NovaRequest $request, $query ) {
+//        return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) );
+//    }
 
     /**
      * Get the fields displayed by the resource.
@@ -68,6 +69,7 @@ class Idea extends Resource {
             Number::make( 'Points', 'points' )->sortable()->filterable()->default( 0 ),
             Boolean::make( 'Winner', 'winner' )->default( false ),
             BelongsTo::make( 'Game' ),
+            HasMany::make( 'Transactions' ),
             BelongsToMany::make( 'Characters', 'characters', CharacterResource::class ),
         ];
     }
