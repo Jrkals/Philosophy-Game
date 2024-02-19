@@ -43,6 +43,8 @@ class Transaction extends Model {
     public function countTransactionToIdea(): void {
         $idea               = $this->idea;
         $this->idea->points += $this->amount;
+        $this->counted      = true;
+        $this->save();
         $this->idea->save();
     }
 }
