@@ -43,7 +43,14 @@ class Player extends Resource {
 
 
     public static function relatableQuery( NovaRequest $request, $query ) {
-        return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) )->orWhere( 'game_id', '=', $request->viaResourceId );
+        if ( $request->query( 'viaResource' ) === 'players' ) {
+            $player = \App\Models\Player::query()->find( $request->query( 'viaResourceId' ) );
+
+            return $query->whereGameId( $player->game_id );
+        }
+
+        return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) )
+                     ->orWhere( 'game_id', '=', $request->viaResourceId );
     }
 
     /**

@@ -44,6 +44,15 @@ class Game extends Resource {
         'name'
     ];
 
+    public static function relatableQuery( NovaRequest $request, $query ) {
+        if ( $request->query( 'viaResource' ) === 'players' ) {
+            $player = \App\Models\Player::query()->find( $request->query( 'viaResourceId' ) );
+
+            return $query->find( $player->game_id );
+        }
+
+    }
+
     public static function fetchCurrentRound( string $string ) {
         $game = \App\Models\Game::query()->latest()->first();
         if ( $string === 'round' ) {
