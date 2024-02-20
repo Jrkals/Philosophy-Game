@@ -67,8 +67,8 @@ class Game extends Resource {
             Number::make( 'Current Turn' )->default( 1 ),
             Number::make( 'Current Round' )->default( 1 ),
             HasMany::make( 'Players' ),
-            HasMany::make( 'Ideas' ),
             HasMany::make( 'Transactions' ),
+            HasMany::make( 'Ideas' ),
             HasMany::make( 'Characters', 'characters', CharacterResource::class ),
 
         ];

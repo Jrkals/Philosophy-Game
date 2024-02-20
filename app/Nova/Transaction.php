@@ -40,9 +40,11 @@ class Transaction extends Resource {
     public static $perPageViaRelationship = 25;
 
 
-//    public static function relatableQuery( NovaRequest $request, $query ) {
-//        return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) );
-//    }
+    public static function relatableQuery( NovaRequest $request, $query ) {
+        return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) )
+                     ->orWhere( 'game_id', '=', $request->viaResourceId );
+        //->orWhere( 'player_id', '=', $request->query( 'viaResourceId' ) );
+    }
 
     /**
      * Get the fields displayed by the resource.
