@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Nova\Actions\SummonCharacter;
+use App\Nova\Helpers\RelatableQueryHelpers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\BelongsTo;
@@ -43,10 +44,8 @@ class Player extends Resource {
 
 
     public static function relatableQuery( NovaRequest $request, $query ) {
-        if ( $request->query( 'viaResource' ) === 'players' ) {
-            $player = \App\Models\Player::query()->find( $request->query( 'viaResourceId' ) );
-
-            return $query->whereGameId( $player->game_id );
+        if ( $request->query( 'viaResource' ) === 'players' || $request->request->get( 'viaResource' ) === 'players' ) {
+            return RelatableQueryHelpers::handlePlayerResource( $request, $query );
         }
 
         return $query->where( 'game_id', '=', $request->query( 'viaResourceId' ) )
