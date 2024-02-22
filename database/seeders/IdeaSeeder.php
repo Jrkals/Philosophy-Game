@@ -377,7 +377,7 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $jpii->ideas()->attach( $continentalism->id, [ 'type' => 'minor' ] );
         $jpii->ideas()->attach( $hylomorphism->id, [ 'type' => 'minor' ] );
 
-        $nihilism  = Idea::query()->whereGameId( $game->id )->whereName( 'Continental' )->firstOrFail();
+        $nihilism  = Idea::query()->whereGameId( $game->id )->whereName( 'Nihilism' )->firstOrFail();
         $heidegger = Character::factory( [
             'name'  => 'Heidegger',
             'era'   => 'Postmodern',
