@@ -683,7 +683,7 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $cicero->ideas()->attach( $aristocracy->id, [ 'type' => 'minor' ] );
 
         $plotinus = Character::factory( [
-            'name'  => 'Cicero',
+            'name'  => 'Plotinus',
             'era'   => 'Roman',
             'level' => 5,
         ] )->for( $game )->create();
@@ -718,7 +718,7 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $origen->ideas()->attach( $jesusDeity->id, [ 'type' => 'minor' ] );
 
         $justinMartyr = Character::factory( [
-            'name'  => 'Philo',
+            'name'  => 'Justin Martyr',
             'era'   => 'Roman',
             'level' => 5,
         ] )->for( $game )->create();
@@ -726,4 +726,8 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $justinMartyr->ideas()->attach( $jesusDeity->id, [ 'type' => 'major' ] );
         $justinMartyr->ideas()->attach( $freeWill->id, [ 'type' => 'minor' ] );
     }
+    // TODO game fixes
+    // effect cards for Nietzsche
+    // colonialism typo says post modern
+    // typo in roman continuous effect that is not continuous
 }
