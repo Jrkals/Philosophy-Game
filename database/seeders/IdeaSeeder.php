@@ -693,7 +693,7 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $plotinus->ideas()->attach( $jesusMereHumanity->id, [ 'type' => 'minor' ] );
 
         $lucretius = Character::factory( [
-            'name'  => 'Licretius',
+            'name'  => 'Lucretius',
             'era'   => 'Roman',
             'level' => 6,
         ] )->for( $game )->create();
