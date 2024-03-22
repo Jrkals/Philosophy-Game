@@ -726,8 +726,4 @@ class IdeaSeeder extends \Illuminate\Database\Seeder {
         $justinMartyr->ideas()->attach( $jesusDeity->id, [ 'type' => 'major' ] );
         $justinMartyr->ideas()->attach( $freeWill->id, [ 'type' => 'minor' ] );
     }
-    // TODO game fixes
-    // effect cards for Nietzsche
-    // colonialism typo says post modern
-    // typo in roman continuous effect that is not continuous
 }

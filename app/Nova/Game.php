@@ -124,6 +124,6 @@ class Game extends Resource {
      * @return array
      */
     public function actions( NovaRequest $request ) {
-        return [ new refreshScore, new SeedIdeas, new NextRound, new NextTurn ];
+        return [ new refreshScore, new SeedIdeas, new NextTurn ];
     }
 }

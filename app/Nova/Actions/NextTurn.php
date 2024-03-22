@@ -27,6 +27,9 @@ class NextTurn extends Action {
     public function handle( ActionFields $fields, Collection $models ) {
         $game = $models->first();
         $game->current_turn ++;
+        if ( $game->current_turn % $game->players->count() === 1 ) {
+            $game->current_round += 1;
+        }
         $game->save();
     }
 
